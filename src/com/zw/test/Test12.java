@@ -11,8 +11,8 @@ import java.security.cert.X509Certificate;
 public class Test12 {
     public static void main(String[] args) {
         try {
-            URL url = new URL("");
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            //URL url = new URL("");
+            // HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             // 创建SSLContext对象，并使用我们指定的信任管理器初始化
             TrustManager[] tm = {new Demo_X509Certificate()};
             SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
@@ -87,13 +87,21 @@ class Demo_X509Certificate implements X509TrustManager {
      */
     public void checkServerTrusted(X509Certificate[] x509Certificates, String authType) throws CertificateException {
         try {
+            // 采用sun JSSE X509校验机制
             sunJSSEX509TrustManager.checkServerTrusted(x509Certificates, authType);
+
+            // 自定义校验
+            // doCheckServerTrusted(x509Certificates, authType);
         } catch (CertificateException ex) {
             /*
              * Possibly pop up a dialog box asking whether to trust the
              * cert chain.
              */
         }
+    }
+
+    private void doCheckServerTrusted(X509Certificate[] x509Certificates, String authType) {
+
     }
 
     @Override
