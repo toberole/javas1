@@ -52,8 +52,8 @@ class Demo_X509Certificate implements X509TrustManager {
         tmf.init(ks);
         TrustManager tms[] = tmf.getTrustManagers();
         /*
-         * Iterate over the returned trustmanagers, look
-         * for an instance of X509TrustManager.  If found,
+         * Iterate over the returned trustmanagers,
+         * look for an instance of X509TrustManager.  If found,
          * use that as our "default" trust manager.
          */
         for (int i = 0; i < tms.length; i++) {
