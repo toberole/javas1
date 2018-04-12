@@ -24,7 +24,7 @@ public class MulitThreadDownloader {
 
     public static void download(String urlStr, DownLoadListener downLoadListener) {
         try {
-            HttpURLConnection conn = openConnection(urlStr);
+            HttpURLConnection conn = openConnection(urlStr, null);
             int responseCode = conn.getResponseCode();
             if (HttpURLConnection.HTTP_OK == responseCode) {
                 int totalLength = conn.getContentLength();
@@ -83,7 +83,7 @@ public class MulitThreadDownloader {
             e.printStackTrace();
 
             if (null != downLoadListener) {
-                downLoadListener.onFaild();
+                downLoadListener.onFaild(0, "");
             }
         }
     }
