@@ -4,7 +4,7 @@ package com.zw.test.pattern;
  * 懒汉式
  */
 public class Singleton1 {
-    private static Singleton1 instance = null;
+    private volatile static Singleton1 instance = null;
 
     public static Singleton1 getInstance() {
         if (null == instance) {
@@ -25,7 +25,7 @@ public class Singleton1 {
         return instance;
     }
 
-    private Singleton1(){
+    private Singleton1() {
 
     }
 }

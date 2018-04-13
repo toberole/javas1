@@ -48,9 +48,7 @@ public class Test01 {
 
     public static void main(String[] args) {
         Integer a = 1;
-
         System.out.println(new Object().hashCode());
-
 
         List list = new ArrayList<String>();
 
