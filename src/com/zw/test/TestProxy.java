@@ -1,7 +1,8 @@
 package com.zw.test;
 
+import com.zw.test.proxy.Interceptor;
 import com.zw.test.proxy.ProxyFactory;
-import com.zw.test.proxy.XXProxy;
+import com.zw.test.proxy.XXProxyJDK;
 
 import java.lang.reflect.Method;
 
@@ -18,17 +19,15 @@ public class TestProxy implements TestProxyInterface {
 
     public static void main(String[] args) {
         TestProxy testProxy = new TestProxy();
-        XXProxy xxProxy = new XXProxy(testProxy, new XXProxy.Interceptor() {
+        XXProxyJDK xxProxy = new XXProxyJDK(testProxy, new Interceptor() {
             @Override
-            public Object onPreExecute(Object proxy, Method method, Object[] args) {
+            public void onPreExecute(Method method, Object[] args) {
                 System.out.println(" onPreExecute " + method.getName());
-                return proxy;
             }
 
             @Override
-            public Object onAfterExecute(Object proxy, Method method, Object[] args) {
+            public void onAfterExecute(Method method, Object[] args) {
                 System.out.println(" onAfterExecute " + method.getName());
-                return proxy;
             }
         });
 
@@ -47,17 +46,15 @@ public class TestProxy implements TestProxyInterface {
 
         System.out.println("******************************");
 
-        TestProxyInterface pf = ProxyFactory.getInstance().getProxy(testProxy, new XXProxy.Interceptor() {
+        TestProxyInterface pf = ProxyFactory.getInstance().getProxy(testProxy, new Interceptor() {
             @Override
-            public Object onPreExecute(Object proxy, Method method, Object[] args) {
+            public void onPreExecute(Method method, Object[] args) {
                 System.out.println(" onPreExecute " + method.getName());
-                return proxy;
             }
 
             @Override
-            public Object onAfterExecute(Object proxy, Method method, Object[] args) {
+            public void onAfterExecute(Method method, Object[] args) {
                 System.out.println(" onAfterExecute " + method.getName());
-                return proxy;
             }
         });
 

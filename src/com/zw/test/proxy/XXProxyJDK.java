@@ -9,7 +9,7 @@ import java.lang.reflect.Proxy;
  * 是在jvm运行时动态生成的一个对象，是在运行时动态生成的一个对象，
  * 并且命名方式都是以$开头，Proxy为中，最后一个数字表示对象的标号 [$Proxy0]。
  */
-public class XXProxy {
+public class XXProxyJDK {
     /**
      * 被代理的目标对象
      */
@@ -24,7 +24,7 @@ public class XXProxy {
      * @param subject     被代理的对象
      * @param interceptor 方法执行的拦截器 可以在方法执行前后做出相应的动作
      */
-    public XXProxy(Object subject, Interceptor interceptor) {
+    public XXProxyJDK(Object subject, Interceptor interceptor) {
         if (null == subject) {
             throw new NullPointerException("subject is null");
         }
@@ -34,10 +34,9 @@ public class XXProxy {
     }
 
     public <T> T getProxy() {
-        T result = (T) Proxy.newProxyInstance(subject.getClass().getClassLoader(),
-                subject.getClass().getInterfaces(),
-                new XXInvocationHandler());
-        return result;
+        Class clazz = subject.getClass();
+        Class[] interfaces = clazz.getInterfaces();
+        return  (T) Proxy.newProxyInstance(clazz.getClassLoader(), interfaces, new XXInvocationHandler());
     }
 
     public Object getSubject() {
@@ -58,25 +57,16 @@ public class XXProxy {
          */
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             if (interceptor != null) {
-                interceptor.onPreExecute(proxy, method, args);
+                interceptor.onPreExecute( method, args);
             }
 
             method.invoke(subject, args);
 
             if (null != interceptor) {
-                interceptor.onAfterExecute(proxy, method, args);
+                interceptor.onAfterExecute(method, args);
             }
 
             return proxy;
         }
-    }
-
-    /**
-     * 目标对象方法执行前后 做相应的处理
-     */
-    public interface Interceptor {
-        public Object onPreExecute(Object proxy, Method method, Object[] args);
-
-        public Object onAfterExecute(Object proxy, Method method, Object[] args);
     }
 }
