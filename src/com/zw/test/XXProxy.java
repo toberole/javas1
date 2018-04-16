@@ -21,8 +21,12 @@ public class XXProxy {
      */
     private Interceptor interceptor;
 
-    public XXProxy(Object target, Interceptor interceptor) {
-        this.subject = target;
+    public XXProxy(Object subject, Interceptor interceptor) {
+        if (null == subject) {
+            throw new RuntimeException("subject is null");
+        }
+
+        this.subject = subject;
         this.interceptor = interceptor;
     }
 
