@@ -1,6 +1,8 @@
 package com.zw.test;
 
 
+import org.omg.PortableInterceptor.Interceptor;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -21,6 +23,10 @@ public class XXProxy {
      */
     private Interceptor interceptor;
 
+    /**
+     * @param subject     被代理的对象
+     * @param interceptor 方法执行的拦截器 可以在方法执行前后做出相应的动作
+     */
     public XXProxy(Object subject, Interceptor interceptor) {
         if (null == subject) {
             throw new RuntimeException("subject is null");
@@ -37,15 +43,6 @@ public class XXProxy {
 
     public Object getSubject() {
         return subject;
-    }
-
-    /**
-     * 目标对象方法执行前后 做相应的处理
-     */
-    public interface Interceptor {
-        public Object onPreExecute(Object proxy, Method method, Object[] args);
-
-        public Object onAfterExecute(Object proxy, Method method, Object[] args);
     }
 
     public class XXInvocationHandler implements InvocationHandler {
@@ -73,5 +70,14 @@ public class XXProxy {
 
             return proxy;
         }
+    }
+
+    /**
+     * 目标对象方法执行前后 做相应的处理
+     */
+    public interface Interceptor {
+        public Object onPreExecute(Object proxy, Method method, Object[] args);
+
+        public Object onAfterExecute(Object proxy, Method method, Object[] args);
     }
 }
