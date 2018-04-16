@@ -12,7 +12,7 @@ import java.lang.reflect.Proxy;
  */
 public class XXProxy {
     /**
-     * 被代理的目标类
+     * 被代理的目标对象
      */
     private Object subject;
 
