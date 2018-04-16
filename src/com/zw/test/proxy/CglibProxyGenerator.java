@@ -9,8 +9,8 @@ import java.lang.reflect.Method;
 /**
  * CGlib动态代理是通过继承业务类，生成的动态代理类是业务类的子类，通过重写业务方法进行代理；
  */
-public class ProxyGeneratorCglib extends ProxyGenerator {
-    public ProxyGeneratorCglib(Object subject, Interceptor interceptor) {
+public class CglibProxyGenerator extends ProxyGenerator {
+    public CglibProxyGenerator(Object subject, Interceptor interceptor) {
         super(subject, interceptor);
     }
 

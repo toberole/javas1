@@ -9,9 +9,9 @@ import java.lang.reflect.Proxy;
  * 是在jvm运行时动态生成的一个对象，是在运行时动态生成的一个对象，
  * 并且命名方式都是以$开头，Proxy为中，最后一个数字表示对象的标号 [$Proxy0]。
  */
-public class ProxyGeneratorJDK extends ProxyGenerator {
+public class JDKProxyGenerator extends ProxyGenerator {
 
-    public ProxyGeneratorJDK(Object subject, Interceptor interceptor) {
+    public JDKProxyGenerator(Object subject, Interceptor interceptor) {
         super(subject, interceptor);
     }
 

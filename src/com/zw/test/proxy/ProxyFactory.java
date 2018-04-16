@@ -13,11 +13,11 @@ public class ProxyFactory {
             Class clazz = subject.getClass();
             Class[] interfaces = clazz.getInterfaces();
 
-            if (null != interceptor && interfaces.length > 0) {
-                proxyGenerator = new ProxyGeneratorJDK(subject, interceptor);
+            if (null != interfaces && interfaces.length > 0) {
+                proxyGenerator = new JDKProxyGenerator(subject, interceptor);
             } else {
                 // 采用Cglib生成代理对象
-                proxyGenerator = new ProxyGeneratorCglib(subject, interceptor);
+                proxyGenerator = new CglibProxyGenerator(subject, interceptor);
             }
         }
 
