@@ -1,5 +1,8 @@
 package com.zw.test;
 
+import com.zw.test.proxy.ProxyFactory;
+import com.zw.test.proxy.XXProxy;
+
 import java.lang.reflect.Method;
 
 public class TestProxy implements TestProxyInterface {
@@ -41,5 +44,24 @@ public class TestProxy implements TestProxyInterface {
          */
         testProxyInterface.test();
         testProxyInterface.sysHello();
+
+        System.out.println("******************************");
+
+        TestProxyInterface pf = ProxyFactory.getInstance().getProxy(testProxy, new XXProxy.Interceptor() {
+            @Override
+            public Object onPreExecute(Object proxy, Method method, Object[] args) {
+                System.out.println(" onPreExecute " + method.getName());
+                return proxy;
+            }
+
+            @Override
+            public Object onAfterExecute(Object proxy, Method method, Object[] args) {
+                System.out.println(" onAfterExecute " + method.getName());
+                return proxy;
+            }
+        });
+
+        pf.sysHello();
+        pf.test();
     }
 }

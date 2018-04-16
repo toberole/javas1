@@ -1,16 +1,13 @@
-package com.zw.test;
-
-
-import org.omg.PortableInterceptor.Interceptor;
+package com.zw.test.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * 通过 Proxy.newProxyInstance 创建的代理对象
- * 是在jvm运行时动态生成的一个对象，是在运行是动态生成的一个对象，
- * 并且命名方式都是以$开头，proxy为中，最后一个数字表示对象的标号。
+ * 通过 Proxy.newProxyInstance 创建的代理对象，
+ * 是在jvm运行时动态生成的一个对象，是在运行时动态生成的一个对象，
+ * 并且命名方式都是以$开头，Proxy为中，最后一个数字表示对象的标号 [$Proxy0]。
  */
 public class XXProxy {
     /**
@@ -29,7 +26,7 @@ public class XXProxy {
      */
     public XXProxy(Object subject, Interceptor interceptor) {
         if (null == subject) {
-            throw new RuntimeException("subject is null");
+            throw new NullPointerException("subject is null");
         }
 
         this.subject = subject;
@@ -37,7 +34,9 @@ public class XXProxy {
     }
 
     public <T> T getProxy() {
-        T result = (T) Proxy.newProxyInstance(subject.getClass().getClassLoader(), subject.getClass().getInterfaces(), new XXInvocationHandler());
+        T result = (T) Proxy.newProxyInstance(subject.getClass().getClassLoader(),
+                subject.getClass().getInterfaces(),
+                new XXInvocationHandler());
         return result;
     }
 
