@@ -30,6 +30,7 @@ public class Test02 {
         Test01 test01 = new Test01();
         Test01 test01Proxy = ProxyFactory.getInstance().getProxy(test01, interceptor);
         test01Proxy.sys();
+        System.out.println();
         test01Proxy.sys1();
     }
 }

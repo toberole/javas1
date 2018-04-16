@@ -2,7 +2,7 @@ package com.zw.test;
 
 import com.zw.test.proxy.Interceptor;
 import com.zw.test.proxy.ProxyFactory;
-import com.zw.test.proxy.XXProxyJDK;
+import com.zw.test.proxy.ProxyGeneratorJDK;
 
 import java.lang.reflect.Method;
 
@@ -19,7 +19,7 @@ public class TestProxy implements TestProxyInterface {
 
     public static void main(String[] args) {
         TestProxy testProxy = new TestProxy();
-        XXProxyJDK xxProxy = new XXProxyJDK(testProxy, new Interceptor() {
+        ProxyGeneratorJDK xxProxy = new ProxyGeneratorJDK(testProxy, new Interceptor() {
             @Override
             public void onPreExecute(Method method, Object[] args) {
                 System.out.println(" onPreExecute " + method.getName());

@@ -9,12 +9,13 @@ import java.lang.reflect.Method;
 /**
  * CGlib动态代理是通过继承业务类，生成的动态代理类是业务类的子类，通过重写业务方法进行代理；
  */
-public class XXProxyCglib extends XXProxy {
-    public XXProxyCglib(Object subject, Interceptor interceptor) {
+public class ProxyGeneratorCglib extends ProxyGenerator {
+    public ProxyGeneratorCglib(Object subject, Interceptor interceptor) {
         super(subject, interceptor);
     }
 
     public <T> T getProxy() {
+        T result = null;
         //创建加强器，用来创建动态代理类
         Enhancer enhancer = new Enhancer();
 
@@ -25,8 +26,10 @@ public class XXProxyCglib extends XXProxy {
         XXMethodInterceptor xxMethodInterceptor = new XXMethodInterceptor();
         enhancer.setCallback(xxMethodInterceptor);
 
-        // 创建动态代理类对象并返回
-        return (T) enhancer.create();
+        // 创建动态代理类对象
+        result = (T) enhancer.create();
+
+        return result;
     }
 
     private class XXMethodInterceptor implements MethodInterceptor {

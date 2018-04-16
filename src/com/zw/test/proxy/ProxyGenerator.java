@@ -1,6 +1,6 @@
 package com.zw.test.proxy;
 
-public abstract class XXProxy {
+public abstract class ProxyGenerator {
     /**
      * 被代理的目标对象
      */
@@ -15,7 +15,7 @@ public abstract class XXProxy {
      * @param subject     被代理的对象
      * @param interceptor 方法执行的拦截器 可以在方法执行前后做出相应的动作
      */
-    public XXProxy(Object subject, Interceptor interceptor) {
+    public ProxyGenerator(Object subject, Interceptor interceptor) {
         if (null == subject) {
             throw new NullPointerException("subject is null");
         }
