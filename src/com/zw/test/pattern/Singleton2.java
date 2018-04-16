@@ -7,7 +7,7 @@ import javax.xml.transform.sax.SAXTransformerFactory;
  */
 public class Singleton2 {
 
-    public volatile static Singleton2 getInstance() {
+    public  static Singleton2 getInstance() {
         return SingletonHolder.instance;
     }
 
