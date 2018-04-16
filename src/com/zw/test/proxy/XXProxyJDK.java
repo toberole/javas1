@@ -47,7 +47,7 @@ public class XXProxyJDK {
 
         @Override
         /**
-         * proxy: target的代理对象
+         * proxy: subject 的代理对象
          * 该参数的作用：
          *     1. 可以使用反射获取代理对象的信息（也就是proxy.getClass().getName()）。
          *     2. 可以将代理对象返回以进行连续调用，这就是proxy存在的目的。因为this并不是代理对象

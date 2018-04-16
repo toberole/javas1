@@ -41,7 +41,7 @@ public class XXProxyCglib {
 
         @Override
         /**
-         * proxy：生成的代理对象
+         * proxy：subject 的代理对象,该代理对象继承自subject类
          * method：执行的方法
          * args: 方法执行的时候的参数
          * methodProxy：方法的代理
@@ -52,13 +52,14 @@ public class XXProxyCglib {
             }
 
             /**
-             * 执行目标类中的方法
+             * 执行父类中的方法
              */
             methodProxy.invokeSuper(proxy, args);
 
             if (null != interceptor) {
                 interceptor.onAfterExecute(method, args);
             }
+
             return proxy;
         }
     }
