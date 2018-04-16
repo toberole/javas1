@@ -9,38 +9,16 @@ import java.lang.reflect.Proxy;
  * 是在jvm运行时动态生成的一个对象，是在运行时动态生成的一个对象，
  * 并且命名方式都是以$开头，Proxy为中，最后一个数字表示对象的标号 [$Proxy0]。
  */
-public class XXProxyJDK {
-    /**
-     * 被代理的目标对象
-     */
-    private Object subject;
+public class XXProxyJDK extends XXProxy{
 
-    /**
-     * 方法执行拦截器
-     */
-    private Interceptor interceptor;
-
-    /**
-     * @param subject     被代理的对象
-     * @param interceptor 方法执行的拦截器 可以在方法执行前后做出相应的动作
-     */
     public XXProxyJDK(Object subject, Interceptor interceptor) {
-        if (null == subject) {
-            throw new NullPointerException("subject is null");
-        }
-
-        this.subject = subject;
-        this.interceptor = interceptor;
+        super(subject, interceptor);
     }
 
     public <T> T getProxy() {
         Class clazz = subject.getClass();
         Class[] interfaces = clazz.getInterfaces();
-        return  (T) Proxy.newProxyInstance(clazz.getClassLoader(), interfaces, new XXInvocationHandler());
-    }
-
-    public Object getSubject() {
-        return subject;
+        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), interfaces, new XXInvocationHandler());
     }
 
     public class XXInvocationHandler implements InvocationHandler {
@@ -57,7 +35,7 @@ public class XXProxyJDK {
          */
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             if (interceptor != null) {
-                interceptor.onPreExecute( method, args);
+                interceptor.onPreExecute(method, args);
             }
 
             method.invoke(subject, args);
