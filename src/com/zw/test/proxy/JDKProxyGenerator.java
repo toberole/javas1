@@ -25,7 +25,7 @@ public class JDKProxyGenerator extends ProxyGenerator {
         return result;
     }
 
-    public class XXInvocationHandler implements InvocationHandler {
+    private class XXInvocationHandler implements InvocationHandler {
 
         @Override
         /**

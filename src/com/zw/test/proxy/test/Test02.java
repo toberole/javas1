@@ -19,6 +19,7 @@ public class Test02 {
             }
         };
         // jdk实现一个有接口的类的代理
+        System.out.println("=========jdk=========");
         TestImpl testImpl = new TestImpl();
         Test test = ProxyFactory.getInstance().getProxy(testImpl, interceptor);
         test.test();
