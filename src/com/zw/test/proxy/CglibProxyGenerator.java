@@ -47,7 +47,7 @@ public class CglibProxyGenerator extends ProxyGenerator {
             }
 
             /**
-             * 执行父类中的方法
+             * 执行父类中的方法,此处的父类即是被代理的类
              */
             methodProxy.invokeSuper(proxy, args);
 
