@@ -7,9 +7,9 @@ public class ProxyFactory {
 
     public <T> T getProxy(Object subject, Interceptor interceptor) {
         T result = null;
-        ProxyGenerator proxyGenerator = null;
 
         if (null != subject) {
+            ProxyGenerator proxyGenerator = null;
             Class clazz = subject.getClass();
             Class[] interfaces = clazz.getInterfaces();
 
@@ -19,9 +19,9 @@ public class ProxyFactory {
                 // 采用Cglib生成代理对象
                 proxyGenerator = new CglibProxyGenerator(subject, interceptor);
             }
-        }
 
-        result = proxyGenerator.getProxy();
+            result = proxyGenerator.getProxy();
+        }
 
         return result;
     }
